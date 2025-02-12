@@ -2,10 +2,6 @@
   import logo1 from './assets/svelte.svg';
   let logo2 = '/vite.svg';
 
-  let title = '제목';
-  let openDate = 2024;
-  let category = '액션';
-
   let textRed = 'color: red';
 
   const data = [
