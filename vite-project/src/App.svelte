@@ -18,7 +18,7 @@
     <h3>{movie.title}</h3>
     <p>개봉: {movie.openDate}</p>
     <p>장르: {movie.category}</p>
-    <button>좋아요 {likeCount}</button>
+    <button on:click={() => likeCount += 1}>좋아요 {likeCount}</button>
   </div> 
   {/each}
 
