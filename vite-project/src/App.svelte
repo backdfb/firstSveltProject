@@ -21,23 +21,14 @@
   <img src={logo1} alt="">
   <img src={logo2} alt="">
   {#each data as movie, i}
-
+  <div>
+    <h3 class="bg-yellow" style={textRed}>{movie.title}</h3>
+    <h3>{movie.title}</h3>
+    <p>개봉: {movie.openDate}</p>
+    <p>장르: {movie.category}</p>
+  </div>
   {/each}
-  <div>
-    <h3 class="bg-yellow" style={textRed}>{data[0].title}</h3>
-    <p>개봉: {data[0].openDate}</p>
-    <p>장르: {data[0].category}</p>
-  </div>
-  <div>
-    <h3 class="bg-yellow" style={textRed}>{data[1].title}</h3>
-    <p>개봉: {data[1].openDate}</p>
-    <p>장르: {data[1].category}</p>
-  </div>
-  <div>
-    <h3 class="bg-yellow" style={textRed}>{data[2].title}</h3>
-    <p>개봉: {data[2].openDate}</p>
-    <p>장르: {data[2].category}</p>
-  </div>
+
 </main>
 
 <style>
