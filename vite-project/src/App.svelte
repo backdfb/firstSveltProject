@@ -70,17 +70,20 @@
         on:click={() => {handleLike(i)}}>
         <!-- on:click은 클릭 이벤트 처리하는 svelte 문법으로, 좋아요 버튼 클릭 시 handleLike 함수 호출 -->
         좋아요 {data[i].likeCount}</button>
+        <button on:click={() => {isModal = true}} class="btn btn-primary">상세보기</button>
     </div>
   </div> 
   {/each}
 </main>
 
-<div class="modal">
-  <div class="inner">
-    <h3>자세히</h3>
-    <button class="btn-close">닫기</button>
+{#if isModal}
+  <div class="modal">
+    <div class="inner">
+      <h3>자세히</h3>
+      <button class="btn-close" on:click={() =>isModal = false}>닫기</button>
+    </div>
   </div>
-</div>
+{/if}
 
 <style>
   .bg-yellow {
