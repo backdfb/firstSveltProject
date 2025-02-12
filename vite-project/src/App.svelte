@@ -1,15 +1,21 @@
 <script>
-  import {data} from './lib/movies'; 
-  // data 배열은 영화 정보를 담고 있음
-    let likeCount = 0; // 좋아요 수 저장 변수
+  import {data} from './lib/movies'; // data 배열은 영화 정보를 담고 있음
+  import Navbar from './lib/components/Navbar.svelte';
+  import Modal from './lib/components/Modal.svelte'; // Modal 컴포넌트 추가
+  let likeCount = 0; // 좋아요 수 저장 변수
+  const handleLike = (i) => {
+    data[i].likeCount += 1;
+  }
 
-    const handleLike = (i) => {
-      data[i].likeCount += 1;
-    }
+  let isModal = false; // 모달 상태 변수 추가
+  let selectedMovie = 0; // 선택한 영화 정보 저장 변수 추가
 
-    let isModal = false; // 모달 상태 저장 변수 추가가
+  const closeModal = () => {
+    isModal = false;
+  }
 </script>
 
+<Navbar />
 <main class="container">
   <h1>개밥그릇의 인생영화 목록</h1>
   {#each data as movie, i} 
@@ -29,19 +35,22 @@
         on:click={() => {handleLike(i)}}>
         <!-- on:click은 클릭 이벤트 처리하는 svelte 문법으로, 좋아요 버튼 클릭 시 handleLike 함수 호출 -->
         좋아요 {data[i].likeCount}</button>
-        <button on:click={() => {isModal = true}} class="btn btn-primary">상세보기</button>
+        <button on:click={() => {
+          isModal = true;
+          selectedMovie =i;
+        }} class="btn btn-primary">상세보기</button>
     </div>
   </div> 
   {/each}
 </main>
 
 {#if isModal}
-  <div class="modal">
-    <div class="inner">
-      <h3>자세히</h3>
-      <button class="btn-close" on:click={() =>isModal = false}>닫기</button>
-    </div>
-  </div>
+  <Modal 
+    {data} 
+    {selectedMovie}
+    {closeModal}
+  />
+  <!-- Modal 컴포넌트 추가 -->
 {/if}
 
 <style>
@@ -68,24 +77,5 @@
 
   .item .info {
     width: 100%;
-  }
-
-  .modal {
-    background: rgba(0, 0, 0, 0.7);
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;  
-    justify-content: center;
-    align-items: center; 
-  } 
-
-  .modal .inner {
-    background: #fff;
-    width: 80%;
-    padding: 20px;
-    border-radius: 10px;
   }
 </style>
